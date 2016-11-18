@@ -15,7 +15,6 @@ import _ from 'lodash';
 import invariant from 'invariant';
 import cloneReferencedElement from 'react-clone-referenced-element';
 import PureComponent from './utils/PureComponent';
-import { debounce } from 'core-decorators';
 
 import Actions from './ExNavigationActions';
 import NavigationBar from './ExNavigationBar';
@@ -125,7 +124,7 @@ export class ExNavigationStackContext extends ExNavigatorContext {
     return this.navigationContext.router;
   }
 
-  @debounce(500, true)
+
   push(
     route: (ExNavigationRoute | string),
     paramsOrOptions?: (Object | TransitionOptions),
@@ -149,21 +148,21 @@ export class ExNavigationStackContext extends ExNavigatorContext {
     });
   }
 
-  @debounce(500, true)
+
   pop(n: number = 1) {
     this.navigationContext.performAction(({ stacks }) => {
       stacks(this.navigatorUID).pop(n);
     });
   }
 
-  @debounce(500, true)
+
   popToTop() {
     this.navigationContext.performAction(({ stacks }) => {
       stacks(this.navigatorUID).popToTop();
     });
   }
 
-  @debounce(500, true)
+
   replace(route: (ExNavigationRoute | string), params?: Object) {
     if (typeof route == 'string') {
       route = this.router.getRoute(route, params);
